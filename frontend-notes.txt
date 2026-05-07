@@ -1,0 +1,176 @@
+# Frontend-notes.txt
+
+## 1. Project Structure
+
+The project is built using React + Vite and follows a feature-based folder structure for better scalability and maintainability.
+
+### Main Folders
+
+* `src/pages`
+
+  * Contains all application pages.
+  * Divided into:
+
+    * `teacher`
+    * `principal`
+    * `auth`
+    * `public`
+
+* `src/components`
+
+  * Reusable UI components such as Sidebar, Layouts, Cards, etc.
+
+* `src/routes`
+
+  * Contains route configuration and protected route handling.
+
+* `src/context`
+
+  * Contains AuthContext used for authentication and global user state.
+
+* `src/services`
+
+  * Contains API-related functions using Axios.
+
+* `db.json`
+
+  * Mock backend database powered by json-server.
+
+---
+
+## 2. Authentication Flow
+
+Authentication is implemented using React Context API and localStorage.
+
+### Login Flow
+
+1. User enters email and password.
+2. Credentials are matched with users from `db.json`.
+3. If valid:
+
+   * User data is stored in Context API state.
+   * User data is also stored in localStorage.
+4. User is redirected based on role:
+
+   * Teacher → `/teacher/dashboard`
+   * Principal → `/principal/dashboard`
+
+### Logout Flow
+
+1. User clicks logout.
+2. User data is removed from Context and localStorage.
+3. User is redirected to `/login`.
+
+### Persistence
+
+On refresh, the app restores the logged-in user from localStorage.
+
+---
+
+## 3. Role-Based Routing
+
+Protected routes are implemented using a custom `ProtectedRoute` component.
+
+### Teacher Routes
+
+* `/teacher/dashboard`
+* `/teacher/upload`
+* `/teacher/content`
+
+### Principal Routes
+
+* `/principal/dashboard`
+* `/principal/approvals`
+* `/principal/all-content`
+
+### Route Protection Logic
+
+* If no user is logged in:
+
+  * Redirect to `/login`
+* If role does not match:
+
+  * Redirect to login or unauthorized route
+
+This ensures users only access pages allowed for their role.
+
+---
+
+## 4. API Integration Approach
+
+The project uses `json-server` as a mock backend.
+
+### API Communication
+
+Axios is used for API requests.
+
+### Main API Features
+
+* Fetch teacher content
+* Fetch all content
+* Upload content
+* Approve/reject content
+* Filter content by teacherId
+
+### Example Endpoints
+
+* `GET /content`
+* `GET /content?teacherId=1`
+* `POST /content`
+* `PATCH /content/:id`
+
+### Deployment
+
+Frontend is deployed on Vercel and backend json-server is deployed separately on Render.
+
+---
+
+## 5. State Management Approach
+
+The application mainly uses:
+
+* React `useState`
+* React `useEffect`
+* React Context API
+
+### Global State
+
+AuthContext manages:
+
+* Logged-in user
+* Login/logout functions
+
+### Local State
+
+Each page manages:
+
+* Loading states
+* Filters
+* Pagination
+* Form data
+* API responses
+
+This lightweight approach is sufficient for the assignment scope.
+
+---
+
+## 6. Assumptions
+
+* Only two user roles exist:
+
+  * Teacher
+  * Principal
+
+* Authentication is mock-based using json-server.
+
+* File uploads are simulated using Base64 image storage.
+
+* Content approval is handled only by Principal users.
+
+* Live screen only displays:
+
+  * Approved content
+  * Active content within scheduled time
+
+
+
