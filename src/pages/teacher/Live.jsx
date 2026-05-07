@@ -30,9 +30,7 @@ export default function Live() {
 
         return (
           String(item.teacherId) === teacherId &&
-          item.status === "approved" &&
-          now >= start &&
-          now <= end
+          item.status === "approved" 
         );
       });
 

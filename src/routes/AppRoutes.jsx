@@ -11,7 +11,7 @@ import MyContent from "../pages/teacher/MyContent";
 import PrincipalDashboard from "../pages/principal/Dashboard";
 import Approvals from "../pages/principal/Approvals";
 import AllContent from "../pages/principal/AllContent";
-import Live from "../pages/public/Live";
+import Live from "../pages/teacher/Live";
 // Protected
 import ProtectedRoute from "./ProtectedRoute";
 
