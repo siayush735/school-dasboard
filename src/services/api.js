@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",   // ✅ FIXED
+  baseURL: "https://school-cms-zlmm.onrender.com",   // ✅ FIXED
 });
 
 api.interceptors.request.use((config) => {
