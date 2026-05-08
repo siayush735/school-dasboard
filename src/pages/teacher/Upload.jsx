@@ -61,7 +61,7 @@ export default function Upload() {
 
     await uploadContent(payload);
 
-    toast.error("Uploaded successfully");
+    toast.success("Uploaded successfully");
 
     reset();
     setPreview(null);
